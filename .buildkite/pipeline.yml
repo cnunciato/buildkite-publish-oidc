@@ -1,0 +1,14 @@
+steps:
+  - key: "build"
+    label: ":hammer_and_wrench: Build"
+    command: rake
+    artifact_paths: "*.deb"
+
+  - key: "publish"
+    label: ":ubuntu: Publish"
+    depends_on: "build"
+    commands: |
+      buildkite-agent artifact download '*.deb' .
+      FILE=`ls *.deb`
+      TOKEN=`buildkite-agent oidc request-token --audience "https://packages.buildkite.com/steve-playground/oidc-example" --lifetime 300`
+      curl -X POST -H "Authorization: Bearer \$TOKEN" https://api.buildkite.com/v2/packages/organizations/steve-playground/registries/oidc-example/packages -F "file=@\$FILE" --fail-with-body
