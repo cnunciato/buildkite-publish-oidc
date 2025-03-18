@@ -4,9 +4,7 @@ steps:
   - key: "build"
     label: ":hammer_and_wrench: Build"
     commands:
-      - gem install bundler
-      - bundle install 
-      - rake
+      - docker build --output=. --target=export-stage .
     artifact_paths: "*.deb"
 
   - label: ":ubuntu: Publish"
