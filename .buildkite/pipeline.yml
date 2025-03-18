@@ -12,4 +12,4 @@ steps:
     plugins:
       - publish-to-packages#v2.1.0:
           artifacts: "*.deb"
-          registry: "cnunciato-playground/oidc-example"
+          registry: "nunciato/buildkite-oidc-example"
