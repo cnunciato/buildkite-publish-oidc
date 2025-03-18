@@ -1,15 +1,12 @@
-agents:
-  queue: default
 steps:
-  - key: "build"
+  - key: build
     label: ":hammer_and_wrench: Build"
-    commands:
-      - docker build --output=. --target=export-stage .
-    artifact_paths: "*.deb"
+    command: docker build --output=. --target=export-stage .
+    artifact_paths: *.deb
 
   - label: ":ubuntu: Publish"
-    depends_on: "build"
+    depends_on: build
     plugins:
       - publish-to-packages#v2.1.0:
-          artifacts: "*.deb"
-          registry: "nunciato/buildkite-oidc-example"
+          artifacts: *.deb
+          registry: nunciato/buildkite-oidc-example
