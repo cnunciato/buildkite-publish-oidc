@@ -1,3 +1,5 @@
+agents:
+  queue: default
 steps:
   - key: "build"
     label: ":hammer_and_wrench: Build"
@@ -9,4 +11,4 @@ steps:
     plugins:
       - publish-to-packages#v2.1.0:
           artifacts: "*.deb"
-          registry: "steve-playground/oidc-example"
+          registry: "cnunciato-playground/oidc-example"
