@@ -2,11 +2,11 @@ steps:
   - key: build
     label: ":hammer_and_wrench: Build"
     command: docker build --output=. --target=export-stage .
-    artifact_paths: *.deb
+    artifact_paths: "*.deb"
 
   - label: ":ubuntu: Publish"
     depends_on: build
     plugins:
       - publish-to-packages#v2.1.0:
-          artifacts: *.deb
+          artifacts: "*.deb"
           registry: nunciato/buildkite-oidc-example
